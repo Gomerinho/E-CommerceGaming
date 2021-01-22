@@ -20,6 +20,12 @@
 
             </div>
             <div class="mb-3">
+                <label for="date" class="form-label">Date de naissance : </label>
+                <input type="date" class="form-control" max="2004-12-31" id="date" aria-describedby="date" name='date'
+                    value="{{ old('date') }}" required>
+
+            </div>
+            <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
                 <input type="password" class="form-control" id="exampleInputPassword1" name='password'
                     placeholder="mot de passe">

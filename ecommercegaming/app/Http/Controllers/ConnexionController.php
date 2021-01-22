@@ -12,6 +12,18 @@ class ConnexionController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-        return "Traitement du formulaire";
+
+        $resultat = auth()->attempt([
+            'email' => request('email'),
+            'password' => request('password'),
+        ]);
+
+        if ($resultat) {
+            return redirect('/dashboard');
+        }
+
+        return back()->withErrors([
+            'email' => "L'email et le mot de passe ne correspondent pas"
+        ]);
     }
 }

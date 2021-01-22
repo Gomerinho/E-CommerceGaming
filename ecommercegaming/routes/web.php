@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\InscriptionController;
+use App\Http\Controllers\ConnexionController;
 use Illuminate\Support\Facades\Route;
+use App\Models\User as User;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +20,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('/inscription', [InscriptionController::class, 'verification']);
+
+Route::get('/inscription', [InscriptionController::class, 'formulaire']);
+
+Route::get('users', [UsersController::class, 'index']);
+
+Route::post('/connexion', [ConnexionController::class, 'traitement']);

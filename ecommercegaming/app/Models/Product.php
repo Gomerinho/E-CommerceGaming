@@ -11,15 +11,10 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-
-        'img_product',
         'name',
         'desc',
         'price',
         'stock',
-    ];
-
-    protected $attributes = [
-        'activate_code',
+        'img_product',
     ];
 }

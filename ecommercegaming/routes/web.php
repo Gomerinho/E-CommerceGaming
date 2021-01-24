@@ -3,6 +3,7 @@
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ConnexionController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User as User;
@@ -39,3 +40,7 @@ Route::post('/email_modification', [AccountController::class, 'email_modificatio
 Route::post('/password_modification', [AccountController::class, 'password_modification']);
 
 Route::post('/birthdate', [AccountController::class, 'birthdate']);
+
+Route::get('/addProduct', [ProductController::class, 'form']);
+
+Route::post('/addProduct', [ProductController::class, 'addProduct']);

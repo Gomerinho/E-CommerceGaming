@@ -28,12 +28,22 @@ class ProductController extends Controller
                 'desc' => request('desc'),
                 'price' => request('price'),
                 'stock' => request('stock'),
-                'img_product' => $path,
+                'img_product' => $imageName,
             ]);
         }
 
 
         flash('Vous avez ajouté un jeu')->success();
         return back();
+    }
+
+    public function productPage(Request $request)
+    {
+        $id = $request->id;
+        $product = Product::where('id', $id)->first();
+
+        return view('Products/product', [
+            'product' => $product
+        ]);
     }
 }

@@ -44,3 +44,5 @@ Route::post('/birthdate', [AccountController::class, 'birthdate']);
 Route::get('/addProduct', [ProductController::class, 'form']);
 
 Route::post('/addProduct', [ProductController::class, 'addProduct']);
+
+Route::get('/product/{id}', [ProductController::class, 'productPage']);

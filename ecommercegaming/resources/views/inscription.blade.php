@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container" style="margin-top: 5%">
         <form class='row g-3 needs-validation' action="/inscription" method="post">
             {{ csrf_field() }}
             <div class="mb-3">

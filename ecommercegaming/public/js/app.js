@@ -1841,6 +1841,33 @@ module.exports = {
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+/*!
+ * Start Bootstrap - SB Admin v6.0.2 (https://startbootstrap.com/template/sb-admin)
+ * Copyright 2013-2020 Start Bootstrap
+ * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-sb-admin/blob/master/LICENSE)
+ */
+
+
+(function ($) {
+  "use strict"; // Add active state to sidbar nav links
+
+  var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+
+  $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function () {
+    if (this.href === path) {
+      $(this).addClass("active");
+    }
+  }); // Toggle the side navigation
+
+  $("#sidebarToggle").on("click", function (e) {
+    e.preventDefault();
+    $("body").toggleClass("sb-sidenav-toggled");
+  });
+})(jQuery);
+
+$(document).ready(function () {
+  $("#dataTable").DataTable();
+});
 
 /***/ }),
 
@@ -19052,6 +19079,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/css/admin.css":
+/*!*********************************!*\
+  !*** ./resources/css/admin.css ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./node_modules/process/browser.js":
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
@@ -19331,7 +19371,8 @@ process.umask = function() { return 0; };
 /******/ 		
 /******/ 		var deferredModules = [
 /******/ 			["./resources/js/app.js"],
-/******/ 			["./resources/css/app.css"]
+/******/ 			["./resources/css/app.css"],
+/******/ 			["./resources/css/admin.css"]
 /******/ 		];
 /******/ 		// no chunk on demand loading
 /******/ 		

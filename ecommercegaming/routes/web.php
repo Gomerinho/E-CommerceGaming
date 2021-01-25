@@ -6,6 +6,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ConnexionController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User as User;
 
@@ -51,3 +52,5 @@ Route::get('/product/{id}', [ProductController::class, 'productPage']);
 Route::get('/comment/{id}', [ReviewController::class, 'commentPage']);
 
 Route::post('/addReview', [ReviewController::class, 'addReview']);
+
+Route::get('/admin', [AdminController::class, 'adminPanel']);

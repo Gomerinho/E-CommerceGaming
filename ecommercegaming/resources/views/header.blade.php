@@ -27,6 +27,9 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         @if (auth()->check())
                             <a class="dropdown-item" href="/dashboard">Profil</a>
+                            @if (auth()->user()->is_admin)
+                                <a href="/admin" class="dropdown-item">Panneau Admin</a>
+                            @endif
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/signout">Se deconnecter</a>
                         @endif

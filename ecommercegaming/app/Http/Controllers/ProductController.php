@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Product as Product;
-
+use App\Models\Review as Review;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -41,9 +42,16 @@ class ProductController extends Controller
     {
         $id = $request->id;
         $product = Product::where('id', $id)->first();
+        $reviews = DB::table('reviews')
+            ->where('product_id', request('id'))
+            ->join('users', 'user_id', '=', 'users.id')
+            ->select('reviews.*', 'users.*')
+            ->get();
 
         return view('Products/product', [
-            'product' => $product
+            'id' => $product->id,
+            'product' => $product,
+            'review' => $reviews
         ]);
     }
 }

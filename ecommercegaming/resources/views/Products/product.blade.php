@@ -27,24 +27,31 @@
                     <div class="card-header">
                         Product Reviews
                     </div>
-                    <div class="card-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore,
-                            similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum.
-                            Sequi mollitia, necessitatibus quae sint natus.</p>
-                        <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+
+                    @foreach ($review as $reviews)
+                        <div class="card-body">
+                            <p>{{ $reviews->comment }}</p>
+                            <small class="text-muted">écrit par {{ $reviews->name }} le {{ $reviews->created_at }}</small>
+                        </div>
+
                         <hr>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore,
-                            similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum.
-                            Sequi mollitia, necessitatibus quae sint natus.</p>
-                        <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore,
-                            similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum.
-                            Sequi mollitia, necessitatibus quae sint natus.</p>
-                        <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                        <hr>
-                        <a href="#" class="btn btn-success">Laisser un commentaire</a>
-                    </div>
+
+                    @endforeach
+
+                    @if (auth()->check())
+
+                        <form action="/addReview" method="post" class="form-control">
+                            {{ csrf_field() }}
+                            <label for="comment" class="control-label">Commentaire</label>
+                            <input type="text" name="comment" class="control-input" placeholder="Commentaire">
+                            <label for="star" class="control-label">Notes</label>
+                            <input type="number" name="star" class="control-input" placeholder="Notes" max="5" min="1">
+                            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                            <input type="hidden" name="product_id" value="{{ $id }}">
+
+                            <button type="submit" class="btn btn-primary">Ajouter un commentaire</button>
+                        </form>
+                    @endif
                 </div>
             </div>
 

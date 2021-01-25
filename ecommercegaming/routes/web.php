@@ -5,6 +5,7 @@ use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ConnexionController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User as User;
 
@@ -46,3 +47,7 @@ Route::get('/addProduct', [ProductController::class, 'form']);
 Route::post('/addProduct', [ProductController::class, 'addProduct']);
 
 Route::get('/product/{id}', [ProductController::class, 'productPage']);
+
+Route::get('/comment/{id}', [ReviewController::class, 'commentPage']);
+
+Route::post('/addReview', [ReviewController::class, 'addReview']);

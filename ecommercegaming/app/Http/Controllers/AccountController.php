@@ -4,16 +4,28 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User as User;
+use App\Models\Product as Product;
+use App\Models\Vente as Vente;
 
 class AccountController extends Controller
 {
     public function dashboard()
     {
 
+        $ventes = Vente::where('user_id', '=', auth()->user()->id)->get();
+        // if (isset($ventes)) {
+        //     foreach ($ventes as $vente) {
+        //         $product = $vente->product;
+        //     }
+
+        return view('Users/dashboard', [
+            'user' => auth()->user(),
+            'ventes' => $ventes
+        ]);
+        // }
+
+
         if (auth()->check()) {
-            return view('Users/dashboard', [
-                'user' => auth()->user()
-            ]);
         } elseif (auth()->guest()) {
             flash('Vous devez être connecté pour accéder a cette page')->error();
             return redirect('/inscription');

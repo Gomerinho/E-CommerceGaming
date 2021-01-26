@@ -29,12 +29,15 @@ class ProductController extends Controller
                 'desc' => request('desc'),
                 'price' => request('price'),
                 'stock' => request('stock'),
+                'activation_code' => request('activation_code'),
                 'img_product' => $imageName,
             ]);
+            flash('Vous avez ajouté un jeu')->success();
+            return back();
         }
 
 
-        flash('Vous avez ajouté un jeu')->success();
+        flash("Vous n'avez pas renseigner tout les champs")->error();
         return back();
     }
 
@@ -48,10 +51,20 @@ class ProductController extends Controller
             ->select('reviews.*', 'users.name')
             ->get();
 
+
+        foreach ($product as $products) {
+            $rate = DB::table('reviews')
+                ->where('product_id', request('id'))
+                ->avg('star');
+
+            $rate = round($rate, 1);
+        }
+
         return view('Products/product', [
             'id' => $product->id,
             'product' => $product,
             'review' => $reviews,
+            'rate' => $rate
         ]);
     }
 }

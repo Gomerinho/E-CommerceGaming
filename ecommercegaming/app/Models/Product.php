@@ -16,5 +16,11 @@ class Product extends Model
         'price',
         'stock',
         'img_product',
+        'activation_code',
     ];
+
+    public function vente()
+    {
+        return $this->hasMany(Vente::class);
+    }
 }

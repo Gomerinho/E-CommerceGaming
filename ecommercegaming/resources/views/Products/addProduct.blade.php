@@ -20,6 +20,7 @@
             <div class="mb-3 w-25">
                 <label for="stock" class="form-label">Stock du jeu</label>
                 <input type="number" class="form-control w-3" name="stock">
+                <input type="hidden" name="activation_code" value="{{ Str::random(16) }}">
             </div>
 
             <div class="mb-3 w-25">

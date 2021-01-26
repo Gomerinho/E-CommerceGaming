@@ -7,9 +7,11 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ConnexionController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\VenteController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User as User;
 use App\Models\Product as Product;
+use App\Models\Review as Review;
 use Illuminate\Database\Eloquent\Collection;
 
 /*
@@ -26,9 +28,11 @@ use Illuminate\Database\Eloquent\Collection;
 Route::get('/', function () {
 
     $products = Product::simplePaginate(6);
-    $reviews = DB::table('reviews')
+    $reviews = Review::all();
+
     return view('welcome', [
         'products' => $products,
+        'reviews' => $reviews,
     ]);
 });
 
@@ -61,3 +65,7 @@ Route::get('/comment/{id}', [ReviewController::class, 'commentPage']);
 Route::post('/addReview', [ReviewController::class, 'addReview']);
 
 Route::get('/admin', [AdminController::class, 'adminPanel']);
+
+Route::get('/vente', [VenteController::class, 'index']);
+
+Route::post('/vente', [VenteController::class, 'achat']);

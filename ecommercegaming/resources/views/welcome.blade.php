@@ -21,7 +21,6 @@
         <div class="container">
 
             <div class="row">
-
                 <div class="row">
                     @foreach ($products as $product)
                         <div class="col-lg-4 col-md-6 mb-4">
@@ -40,11 +39,26 @@
                                         {{ \Illuminate\Support\Str::limit($product->desc, 150, $end = '...') }}
                                     </p>
                                 </div>
-                                <div class="card-footer">
-                                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                                </div>
+                                @php
+                                $rate = DB::table('reviews')
+                                ->where('product_id', $product->id)
+                                ->avg('star');
+
+                                $rate = round($rate, 1);
+                                @endphp
+
+                                @if (!isset($rate) || $rate == 0)
+                                    <div class="card-footer">
+                                        <small class="text-muted">Aucune note</small>
+                                    </div>
+                                @else
+                                    <div class="card-footer">
+                                        <small class="text-muted">{{ $rate }} &#9733;</small>
+                                    </div>
+                                @endif
                             </div>
                         </div>
+
                     @endforeach
                     {{ $products->links() }}
 

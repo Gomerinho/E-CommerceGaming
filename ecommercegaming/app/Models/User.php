@@ -13,6 +13,11 @@ class User extends Authenticatable
 
     protected $dateFormat = 'd/m/Y';
 
+    public function vente()
+    {
+        return $this->hasMany(Vente::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

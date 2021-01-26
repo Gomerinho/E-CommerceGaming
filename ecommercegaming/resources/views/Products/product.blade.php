@@ -44,9 +44,57 @@
                                 </div>
                             @endif
                         </p>
-                        <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                        4.0 stars
-                        <button class="btn btn-primary ">Acheter</button>
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div>
+                                @if (isset($rate) && $rate != 0)
+                                    @if ($rate >= 1 && $rate < 2)
+                                        <span class="fa fa-star checked" style="color: gold"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                    @endif
+                                    @if ($rate >= 2 && $rate < 3)
+                                        <span class="fa fa-star checked" style="color: gold"></span>
+                                        <span class="fa fa-star checked" style="color: gold"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                    @endif
+                                    @if ($rate >= 3 && $rate < 4)
+                                        <span class="fa fa-star checked" style="color: gold"></span>
+                                        <span class="fa fa-star checked" style="color: gold"></span>
+                                        <span class="fa fa-star checked" style="color: gold"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                    @endif
+                                    @if ($rate >= 4 && $rate < 5)
+                                        <span class="fa fa-star checked" style="color: gold"></span>
+                                        <span class="fa fa-star checked" style="color: gold"></span>
+                                        <span class="fa fa-star checked" style="color: gold"></span>
+                                        <span class="fa fa-star checked" style="color: gold"></span>
+                                        <span class="fa fa-star"></span>
+
+                                    @endif
+
+                                    @if ($rate == 5)
+                                        <span class="fa fa-star checked" style="color: gold"></span>
+                                        <span class="fa fa-star checked" style="color: gold"></span>
+                                        <span class="fa fa-star checked" style="color: gold"></span>
+                                        <span class="fa fa-star checked" style="color: gold"></span>
+                                        <span class="fa fa-star checked" style="color: gold"></span>
+                                    @endif
+                                    {{ $rate }}
+                                @else
+                                    <p>Aucune note</p>
+                                @endif
+                            </div>
+                            <form action="/vente" method="post">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                <button class="btn btn-primary" type="submit">Acheter</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div class="card card-outline-secondary my-4">

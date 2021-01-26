@@ -12,17 +12,17 @@ class InscriptionController extends Controller
         request()->validate([
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'confirmed'],
-            'birthdate' => ['required'],
             'password_confirmation' => ['required']
         ]);
 
         User::create([
             'email' => request('email'),
             'password' => bcrypt(request('password')),
-            'name' => request('name')
+            'name' => request('name'),
+            'birthdate' => request('birthdate'),
         ]);
-
-        return redirect('/');
+        flash('success', 'Vous êtes inscrit, connectez vous !');
+        return redirect('/inscription');
     }
 
     public function formulaire()

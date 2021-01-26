@@ -19,6 +19,7 @@ class ConnexionController extends Controller
         ]);
 
         if ($resultat) {
+            flash('Bienvenuue ! ')->success();
             return redirect('/dashboard');
         }
 

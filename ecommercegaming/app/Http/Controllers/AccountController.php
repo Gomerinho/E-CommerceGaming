@@ -23,8 +23,8 @@ class AccountController extends Controller
     public function signout()
     {
         auth()->logout();
-
-        return redirect('/');
+        flash('Vous êtes déconnecté.')->success();
+        return redirect('/inscription');
     }
 
     public function birthdate()
@@ -37,9 +37,7 @@ class AccountController extends Controller
         ]);
 
         flash('Votre date de naissance a été changée.')->success();
-        return view('Users/dashboard', [
-            'user' => auth()->user(),
-        ]);
+        return redirect('/dashboard');
     }
 
     public function email_modification()

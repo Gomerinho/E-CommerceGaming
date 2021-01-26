@@ -3,8 +3,7 @@
 @section('content')
 
     <div class="container">
-        <div class="main-body" style="
-                    margin-top: 5%">
+        <div class="main-body">
 
             <!-- Breadcrumb -->
             <nav aria-label=" breadcrumb" class="main-breadcrumb">

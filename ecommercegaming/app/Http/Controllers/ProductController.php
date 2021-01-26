@@ -45,13 +45,13 @@ class ProductController extends Controller
         $reviews = DB::table('reviews')
             ->where('product_id', request('id'))
             ->join('users', 'user_id', '=', 'users.id')
-            ->select('reviews.*', 'users.*')
+            ->select('reviews.*', 'users.name')
             ->get();
 
         return view('Products/product', [
             'id' => $product->id,
             'product' => $product,
-            'review' => $reviews
+            'review' => $reviews,
         ]);
     }
 }

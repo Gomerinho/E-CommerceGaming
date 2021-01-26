@@ -18,7 +18,7 @@
 
 <body>
     @include('header')
-    <div class="container">
+    <div class="container" style="margin-top: 2%">
         @include('flash::message')
     </div>
     @yield('content')

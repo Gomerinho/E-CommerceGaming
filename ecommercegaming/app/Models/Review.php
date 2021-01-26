@@ -14,5 +14,6 @@ class Review extends Model
         'star',
         'user_id',
         'product_id',
+        'updated_at'
     ];
 }

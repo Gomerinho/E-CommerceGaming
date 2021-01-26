@@ -20,12 +20,9 @@
 
             </div>
             <div class="mb-3">
-                <label for="date" class="form-label">Date de naissance : </label>
-                <input type="date" class="form-control" max="2004-12-31" id="date" aria-describedby="date" name='date'
+                <label for="birthdate" class="form-label">Date de naissance : </label>
+                <input type="date" class="form-control" max="2004-12-31" id="date" aria-describedby="date" name='birthdate'
                     value="{{ old('date') }}" required>
-                @if ($errors->has('birthdate'))
-                    <p>{{ $errors->first('birthdate') }}</p>
-                @endif
 
             </div>
             <div class="mb-3">

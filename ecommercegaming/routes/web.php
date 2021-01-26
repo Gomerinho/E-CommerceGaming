@@ -9,6 +9,8 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User as User;
+use App\Models\Product as Product;
+use Illuminate\Database\Eloquent\Collection;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +24,12 @@ use App\Models\User as User;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $products = Product::simplePaginate(6);
+    $reviews = DB::table('reviews')
+    return view('welcome', [
+        'products' => $products,
+    ]);
 });
 
 Route::post('/inscription', [InscriptionController::class, 'verification']);

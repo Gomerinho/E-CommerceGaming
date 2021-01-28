@@ -8,6 +8,7 @@ use App\Http\Controllers\ConnexionController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VenteController;
+use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -27,9 +28,9 @@ use Illuminate\Database\Eloquent\Collection;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function () { //Affichage des produits dans la page d'acceuil
 
-    $products = Product::simplePaginate(6);
+    $products = Product::simplePaginate(6); //Systeme de pagination
     $reviews = Review::all();
 
     return view('welcome', [
@@ -83,21 +84,4 @@ Route::get('/admin/modifyProduct/{id}', [AdminController::class, 'modifyProductF
 
 Route::post('/admin/modifyProduct', [AdminController::class, 'modifyProduct']);
 
-// Route::get('/pdftest', function () {
-//     $pdf = App::make('dompdf.wrapper');
-//     // $path = public_path('/invoice/' . auth()->user()->id);
-
-//     // if (!File::isDirectory($path)) {
-
-//     //     File::makeDirectory($path, 0777, true, true);
-//     // }
-//     // $path = public_path() . '/invoice/' . auth()->user()->id;
-
-//     $content = $pdf->loadHTML('<h1>Test</h1>')->download()->getOriginalContent();
-
-//     $path = 'public/invoice/' . auth()->user()->id . '/name.pdf';
-
-//     Storage::put($path, $content);
-
-//     // return PDF::loadHTML('<h1>Test</h1>')->save('/storage/public/invoice/my_stored_file.pdf')->stream('download.pdf');
-// });
+Route::get('/facture', [PdfController::class, 'open']);

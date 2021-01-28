@@ -67,8 +67,41 @@
                             l'utilisateur</button>
                     </form>
                 </div>
-
-            </div>
+                <h2 class="page-header text-center mt-3 mb-3">Achat du joueur</h2>
+                <div class="table-responsive mb-5">
+                    <table class="table table-bordered" id="Datatable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Jeux</th>
+                                <th>Date d'achat</th>
+                                <th>Facture</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Jeux</th>
+                                <th>Date d'achat</th>
+                                <th>Facture</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach ($ventes as $vente)
+                                <tr>
+                                    <td>{{ $vente->id }}</td>
+                                    <td>{{ $vente->product->name }}</td>
+                                    <td> {{ date('d/m/Y', strtotime($vente->created_at)) }}</td>
+                                    <td>
+                                        <a {{-- Récupère le liens vers le pdf
+                                            --}}
+                                            href="/storage/{{ Str::replaceFirst('public/', '', $vente->invoice_path) }}">Facture</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
         </main>
     </div>

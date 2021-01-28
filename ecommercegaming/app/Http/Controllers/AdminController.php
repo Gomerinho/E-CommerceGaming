@@ -41,9 +41,11 @@ class AdminController extends Controller
     public function modifyUserForm()
     {
         $user = User::where('id', '=', request('id'))->first(); //ON récupère l'utilisateur qui correspond
+        $ventes = Vente::where('user_id', '=', request('id'))->get();
         if (auth()->user()->is_admin) {
             return view('Admin/modifyUser', [
-                'user' => $user
+                'user' => $user,
+                'ventes' => $ventes
             ]);
         }
     }
@@ -145,7 +147,7 @@ class AdminController extends Controller
         }
 
 
-        flash("Vous avez modifier l'utilisateur : " . $product->name . ".")->success();
+        flash("Vous avez modifier le jeu : " . $product->name . ".")->success();
         return redirect('/admin/product');
     }
 }

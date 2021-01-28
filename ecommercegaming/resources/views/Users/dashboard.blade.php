@@ -188,6 +188,7 @@
             <div class="row">
 
                 <div class="row">
+                    {{-- Affichage des jeux de l'utilisateur --}}
                     @foreach ($ventes as $vente)
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="card h-100">
@@ -202,6 +203,8 @@
                                     </h4>
                                     <h5>{{ $vente->product->price }} €</h5>
                                     <p class="card-text">
+                                        {{-- On limite le nombre de caractère
+                                        --}}
                                         {{ \Illuminate\Support\Str::limit($vente->product->desc, 150, $end = '...') }}
                                     </p>
                                 </div>
@@ -214,14 +217,14 @@
 
             </div>
             <!-- /.col-lg-9 -->
-
+        </section>
 
     </div>
     <!-- /.row -->
 
     </div>
     <!-- /.container -->
-    </section>
+
     </div>
 
 

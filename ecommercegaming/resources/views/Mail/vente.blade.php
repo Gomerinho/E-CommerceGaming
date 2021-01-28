@@ -214,7 +214,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="no">04</td>
+                            <td class="no">{{ $product->id }}</td>
                             <td class="text-left">
                                 <h3>
                                     {{ $product->name }}

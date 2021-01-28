@@ -53,6 +53,11 @@ class VenteController extends Controller
                 'user_id' => auth()->user()->id
             ]); //Si tout est bon , on crée une vente
 
+            $stock = $product->stock - 1;
+            $product->update([
+                'stock' => $stock
+            ]);
+
             $user = auth()->user(); //Initialisation de l'user
             $user->wallet -= $price; //On lui retire le prix du produit
             $user->save();

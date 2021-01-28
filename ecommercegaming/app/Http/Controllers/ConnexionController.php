@@ -23,8 +23,8 @@ class ConnexionController extends Controller
             return redirect('/dashboard');
         }
 
-        return back()->withErrors([
-            'email' => "L'email et le mot de passe ne correspondent pas"
-        ]);
+        flash("L'email et le mot de passe ne correspondent pas")->error();
+
+        return back();
     }
 }

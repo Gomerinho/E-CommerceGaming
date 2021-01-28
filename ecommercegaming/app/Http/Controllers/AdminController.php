@@ -12,16 +12,16 @@ class AdminController extends Controller
 {
     public function adminPanel()
     {
-        $date = \Carbon\Carbon::today()->subDays(7);
+        $date = \Carbon\Carbon::today()->subDays(7); //Permet de récupérer les 7 derniers jours
         $users = User::all();
-        $userscount = User::all()->count();
+        $userscount = User::all()->count(); //Compte tout les utilisateurs du site
         $userscount7 = User::where('created_at', '>=', $date)
-            ->count();
+            ->count(); //Les utilisateurs inscrit dans les 7 derniers jours
 
-        $ventes = Vente::All();
+        $ventes = Vente::All(); //On récupère toutes les ventes effectué
 
-        if (auth()->check()) {
-            if (auth()->user()->is_admin) {
+        if (auth()->check()) { //Vérification que l'utilisateur est connecté
+            if (auth()->user()->is_admin) { //Vérification que l'utilisateur est administrateur
                 return view('Admin/adminPanel', [
                     'users' => $users,
                     'userscount' => $userscount,
@@ -40,11 +40,12 @@ class AdminController extends Controller
 
     public function modifyUserForm()
     {
-        $user = User::where('id', '=', request('id'))->first();
-
-        return view('Admin/modifyUser', [
-            'user' => $user
-        ]);
+        $user = User::where('id', '=', request('id'))->first(); //ON récupère l'utilisateur qui correspond
+        if (auth()->user()->is_admin) {
+            return view('Admin/modifyUser', [
+                'user' => $user
+            ]);
+        }
     }
 
     public function modifyUser()
@@ -87,19 +88,23 @@ class AdminController extends Controller
         $products = Product::All();
         $user = Product::where('id', '=', request('id'))->first();
         $productcount = $products->count();
-        return view('Admin/adminProduct', [
-            'products' => $products,
-            'productcount' => $productcount
-        ]);
+        if (auth()->user()->is_admin) {
+            return view('Admin/adminProduct', [
+                'products' => $products,
+                'productcount' => $productcount
+
+            ]);
+        }
     }
 
     public function modifyProductForm()
     {
         $product = Product::where('id', '=', request('id'))->first();
-
-        return view('Admin/modifyProduct', [
-            'product' => $product
-        ]);
+        if (auth()->user()->is_admin) {
+            return view('Admin/modifyProduct', [
+                'product' => $product
+            ]);
+        }
     }
 
     public function modifyProduct(Request $request)
@@ -115,7 +120,7 @@ class AdminController extends Controller
             'activation_code' => ['required'],
         ]);
 
-        if (null !== request('file')) {
+        if (null !== request('file')) { //Permet de vérifier si on change l'image ou non
             $destinationPath = '/public/image/product';
             $imageName = request('img_product');
             $request->file('file')->storeAs($destinationPath, $imageName);
@@ -138,7 +143,6 @@ class AdminController extends Controller
 
             ]);
         }
-
 
 
         flash("Vous avez modifier l'utilisateur : " . $product->name . ".")->success();

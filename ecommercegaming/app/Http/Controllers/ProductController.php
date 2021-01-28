@@ -11,19 +11,21 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    public function form()
+    public function form() //Affichage du formulaire
     {
-        return view('Products/addProduct');
+        if (auth()->user()->is_admin) { //Uniquement pour les admins connectés
+            return view('Products/addProduct');
+        }
     }
 
-    public function addProduct(Request $request)
+    public function addProduct(Request $request) //Ajouter un jeu
     {
 
         if ($request->hasFile('file')) {
-            $destinationPath = '/public/image/product';
-            $image = $request->file('file');
-            $imageName = Str::random(10) . "." . $image->getClientOriginalExtension();
-            $path = $request->file('file')->storeAs($destinationPath, $imageName);
+            $destinationPath = '/public/image/product'; //Destination de l'image du jeu
+            $image = $request->file('file'); //On récupère l'image
+            $imageName = Str::random(10) . "." . $image->getClientOriginalExtension(); //Création d'un nom aléatoire
+            $path = $request->file('file')->storeAs($destinationPath, $imageName); //Stockage de l'image
             Product::create([
                 'name' => request('name'),
                 'desc' => request('desc'),
@@ -31,11 +33,10 @@ class ProductController extends Controller
                 'stock' => request('stock'),
                 'activation_code' => request('activation_code'),
                 'img_product' => $imageName,
-            ]);
+            ]); //Création du produit
             flash('Vous avez ajouté un jeu')->success();
             return redirect('/admin/product');
         }
-
 
         flash("Vous n'avez pas renseigner tout les champs")->error();
         return back();
@@ -49,15 +50,15 @@ class ProductController extends Controller
             ->where('product_id', request('id'))
             ->join('users', 'user_id', '=', 'users.id')
             ->select('reviews.*', 'users.name')
-            ->get();
+            ->get(); //On récupère les reviews qui correspondent au Jeu afficher
 
 
-        foreach ($product as $products) {
+        foreach ($product as $products) { //Ce for each permet de créer une moyenne de la note
             $rate = DB::table('reviews')
                 ->where('product_id', request('id'))
                 ->avg('star');
 
-            $rate = round($rate, 1);
+            $rate = round($rate, 1);  //Round permet d'arround à 1 décimal
         }
 
         return view('Products/product', [
@@ -65,6 +66,6 @@ class ProductController extends Controller
             'product' => $product,
             'review' => $reviews,
             'rate' => $rate
-        ]);
+        ]); //Retourne la vue avec toutes les données
     }
 }

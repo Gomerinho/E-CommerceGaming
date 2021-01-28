@@ -9,7 +9,7 @@ use App\Models\Vente as Vente;
 
 class AccountController extends Controller
 {
-    public function dashboard()
+    public function dashboard() //affichage du profil
     {
 
         $ventes = Vente::where('user_id', '=', auth()->user()->id)->get();
@@ -32,14 +32,14 @@ class AccountController extends Controller
         }
     }
 
-    public function signout()
+    public function signout() //deconnexion
     {
         auth()->logout();
         flash('Vous êtes déconnecté.')->success();
         return redirect('/inscription');
     }
 
-    public function birthdate()
+    public function birthdate() //Changement de la date de naissance
     {
         $user = auth()->user();
         $user->birthdate = request('date');
@@ -52,7 +52,7 @@ class AccountController extends Controller
         return redirect('/dashboard');
     }
 
-    public function email_modification()
+    public function email_modification() //Modification de l'email
     {
         request()->validate([
             'email' => ['required', 'email', 'unique:users'],
@@ -68,7 +68,7 @@ class AccountController extends Controller
         ]);
     }
 
-    public function password_modification()
+    public function password_modification() //Modification du mot de passe
     {
         request()->validate([
             'password' => ['required', 'min:8', 'confirmed'],

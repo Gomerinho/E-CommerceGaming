@@ -6,17 +6,17 @@ use Illuminate\Http\Request;
 
 class ConnexionController extends Controller
 {
-    public function traitement()
+    public function traitement() //Connexion
     {
         request()->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
-        ]);
+        ]); //Vérification des données
 
         $resultat = auth()->attempt([
             'email' => request('email'),
             'password' => request('password'),
-        ]);
+        ]); //Connexion de l'utilisateur
 
         if ($resultat) {
             flash('Bienvenuue ! ')->success();

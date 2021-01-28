@@ -38,33 +38,35 @@
     </div>
 </nav>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Se connecter</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="container">
-                <form class='row g-3 needs-validation' action="/connexion" method="post">
-                    {{ csrf_field() }}
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            name='email' placeholder='Entrez votre email' required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Mot de
-                            passe</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" name='password'
-                            placeholder="Entrez mot de passe">
-                    </div>
-                    <div class="modal-footer">
-                        <input type="submit" class="btn btn-primary" value="Se connecter">
-                    </div>
-                </form>
+@if (auth()->guest())
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Se connecter</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="container">
+                    <form class='row g-3 needs-validation' action="/connexion" method="post">
+                        {{ csrf_field() }}
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" name='email' placeholder='Entrez votre email' required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Mot de
+                                passe</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" name='password'
+                                placeholder="Entrez mot de passe">
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-primary" value="Se connecter">
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+@endif

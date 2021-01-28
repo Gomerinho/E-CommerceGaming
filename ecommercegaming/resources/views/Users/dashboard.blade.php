@@ -144,10 +144,10 @@
                                 </div>
                                 <div class="col text-secondary">
 
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#birthModal"
                                         class="btn btn-warning"><i class="fas fa-edit"></i></button>
 
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                    <div class="modal fade" id="birthModal" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <form action="/birthdate" method="post">
                                             {{ csrf_field() }}

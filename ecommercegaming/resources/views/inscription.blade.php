@@ -1,14 +1,15 @@
 @extends('layout')
 
 @section('content')
+    <h2 class="page-title text-center font-weight-bold text-uppercase">REJOIDNRE LA COMMUNAUTé DE FINDMYGAME</h2>
+    <div class="container border rounded p-3 mb-3 mt-3">
 
-    <div class="container" style="margin-top: 5%">
         <form class='row g-3 needs-validation' action="/inscription" method="post">
             {{ csrf_field() }}
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='email'
-                    value="{{ old('email') }}" required>
+                    value="{{ old('email') }}" placeholder='Entrez votre adresse mail' required>
                 @if ($errors->has('email'))
                     <p>{{ $errors->first('email') }}</p>
                 @endif
@@ -16,7 +17,7 @@
             <div class="mb-3">
                 <label for="name" class="form-label">Nom</label>
                 <input type="text" class="form-control" id="name" aria-describedby="name" name='name'
-                    value="{{ old('name') }}" required>
+                    value="{{ old('name') }}" placeholder="Entrez votre nom " required>
 
             </div>
             <div class="mb-3">
@@ -42,7 +43,8 @@
                     <p>{{ $errors->first('password_confirmation') }}</p>
                 @endif
             </div>
-            <input type="submit" class="btn btn-primary" value="valider">
+
+            <button type="submit" class="btn btn-primary">Nous rejoindre</button>
 
         </form>
     </div>

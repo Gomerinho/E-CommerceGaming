@@ -19,7 +19,8 @@
                         <h3 class="card-title">{{ $product->name }}</h3>
                         <h4>{{ $product->price }} €</h4>
                         <p class="card-text">
-                            {{ \Illuminate\Support\Str::limit($product->desc, 500, $end = '...') }}
+                            
+                            {!! \Illuminate\Support\Str::limit(nl2br($product->desc), 1000, $end = '...') !!}
                             @if (\Illuminate\Support\Str::length($product->desc) > 500)
                                 <a data-bs-toggle="modal" data-bs-target="#staticBackdrop">lire la suite</a>
                                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
@@ -33,7 +34,7 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                {{ $product->desc }}
+                                                {!! nl2br(e($product->desc)) !!}
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
@@ -113,6 +114,7 @@
 
                     @endforeach
 
+                    <div class='card-footer'>
                     @if (auth()->check())
 
                         <form action="/addReview" method="post" class="form-control">
@@ -154,6 +156,7 @@
                             <button type="submit" class="btn btn-primary">Ajouter un commentaire</button>
                         </form>
                     @endif
+                    </div>
                 </div>
             </div>
 

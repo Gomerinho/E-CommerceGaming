@@ -11,7 +11,7 @@ class InscriptionController extends Controller
     {
         request()->validate([
             'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'confirmed'],
+            'password' => ['required', 'confirmed', 'min:8'],
             'password_confirmation' => ['required']
         ]);
 

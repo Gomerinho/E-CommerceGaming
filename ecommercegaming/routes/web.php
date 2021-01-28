@@ -69,3 +69,14 @@ Route::get('/admin', [AdminController::class, 'adminPanel']);
 Route::get('/vente', [VenteController::class, 'index']);
 
 Route::post('/vente', [VenteController::class, 'achat']);
+
+
+Route::get('/admin/modifyUser/{id}', [AdminController::class, 'modifyUserForm']);
+
+Route::post('/admin/modifyUser', [AdminController::class, 'modifyUser']);
+
+Route::get('/admin/product', [AdminController::class, 'productIndex']);
+
+Route::get('/admin/modifyProduct/{id}', [AdminController::class, 'modifyProductForm']);
+
+Route::post('/admin/modifyProduct', [AdminController::class, 'modifyProduct']);

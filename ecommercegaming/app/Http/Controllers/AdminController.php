@@ -119,17 +119,27 @@ class AdminController extends Controller
             $destinationPath = '/public/image/product';
             $imageName = request('img_product');
             $request->file('file')->storeAs($destinationPath, $imageName);
+            $product->update([
+                'img_product' => $imageName,
+                'name' => request('name'),
+                'desc' => request('desc'),
+                'stock' => request('stock'),
+                'price' => request('price'),
+                'activation_code' => request('activation_code'),
+
+            ]);
+        } else {
+            $product->update([
+                'name' => request('name'),
+                'desc' => request('desc'),
+                'stock' => request('stock'),
+                'price' => request('price'),
+                'activation_code' => request('activation_code'),
+
+            ]);
         }
 
-        $product->update([
-            'img_product' => $imageName,
-            'name' => request('name'),
-            'desc' => request('desc'),
-            'stock' => request('stock'),
-            'price' => request('price'),
-            'activation_code' => request('activation_code'),
-            
-        ]);
+
 
         flash("Vous avez modifier l'utilisateur : " . $product->name . ".")->success();
         return redirect('/admin/product');

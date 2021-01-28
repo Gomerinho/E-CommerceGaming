@@ -19,7 +19,7 @@
                         <h3 class="card-title">{{ $product->name }}</h3>
                         <h4>{{ $product->price }} €</h4>
                         <p class="card-text">
-                            
+
                             {!! \Illuminate\Support\Str::limit(nl2br($product->desc), 1000, $end = '...') !!}
                             @if (\Illuminate\Support\Str::length($product->desc) > 500)
                                 <a data-bs-toggle="modal" data-bs-target="#staticBackdrop">lire la suite</a>
@@ -100,62 +100,67 @@
                 </div>
                 <div class="card card-outline-secondary my-4">
                     <div class="card-header">
-                        Product Reviews
+                        Avis sur le jeu
                     </div>
 
                     @foreach ($review as $reviews)
-                        <div class="card-body">
-                            <p>{{ $reviews->star }}&#9733; {{ $reviews->comment }}</p>
+                        <div class="card-body m-3 border">
+                            <p>{{ $reviews->comment }} : {{ $reviews->star }}<span style="color: gold">&#9733;</span></p>
                             <small class="text-muted">écrit par {{ $reviews->name }} le
                                 {{ date('d/m/Y', strtotime($reviews->created_at)) }}</small>
                         </div>
-
-                        <hr>
-
                     @endforeach
 
                     <div class='card-footer'>
-                    @if (auth()->check())
+                        @if (auth()->check())
 
-                        <form action="/addReview" method="post" class="form-control">
-                            {{ csrf_field() }}
-                            <label for="comment" class="control-label">Commentaire</label>
-                            <input type="text" name="comment" class="control-input" placeholder="Commentaire">
-                            <label for="star" class="control-label">Notes</label>
-                            <input type="number" name="star" class="control-input" placeholder="Notes" max="5" min="1">
-                            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                            <input type="hidden" name="product_id" value="{{ $id }}">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                Launch demo modal
-                            </button>
+                            <form action="/addReview" method="post">
+                                {{ csrf_field() }}
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            ...
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#commentModal">
+                                    Commenter le jeu
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Ajouter un Commentaire</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group">
+
+                                                    <label for="comment" class="control-label">Commentaire</label>
+                                                    <input type="text" name="comment" class="form-control"
+                                                        placeholder="Commentaire">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="star" class="control-label">Notes</label>
+                                                    <input type="number" name="star" class="form-control"
+                                                        placeholder="Notes" max="5" min="1">
+                                                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                                                    <input type="hidden" name="product_id" value="{{ $id }}">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Fermer</button>
+                                                <button type="submit" class="btn btn-primary">Ajouter un
+                                                    commentaire</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <button type="submit" class="btn btn-primary">Ajouter un commentaire</button>
-                        </form>
-                    @endif
+
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>

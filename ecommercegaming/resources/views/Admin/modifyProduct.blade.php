@@ -50,7 +50,8 @@
                         @endif
                         <div class="form-group">
                             <label for="activation_code">Code Activation : </label>
-                            <input type="text" name="activation_code" id="activation_code" class="form-control">
+                            <input type="text" name="activation_code" id="activation_code" class="form-control"
+                                value="{{ $product->activation_code }}">
                         </div>
                         @if ($errors->has('activation_code'))
                             <p class="text-danger">{{ $errors->first('activation_code') }}</p>

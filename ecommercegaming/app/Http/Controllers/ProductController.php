@@ -33,7 +33,7 @@ class ProductController extends Controller
                 'img_product' => $imageName,
             ]);
             flash('Vous avez ajouté un jeu')->success();
-            return back();
+            return redirect('/admin/product');
         }
 
 

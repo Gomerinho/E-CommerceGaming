@@ -78,6 +78,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <a href="/addProduct"><button class="btn btn-success">Ajouter un produit</button></a>
                         </div>
                     </div>
                 </div>

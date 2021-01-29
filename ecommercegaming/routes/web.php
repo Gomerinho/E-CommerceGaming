@@ -85,3 +85,5 @@ Route::get('/admin/modifyProduct/{id}', [AdminController::class, 'modifyProductF
 Route::post('/admin/modifyProduct', [AdminController::class, 'modifyProduct']);
 
 Route::get('/facture', [PdfController::class, 'open']);
+
+Route::post('/search', [ProductController::class, 'search']);

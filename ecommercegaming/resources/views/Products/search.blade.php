@@ -1,37 +1,7 @@
 @extends('layout')
 
 @section('content')
-
-    <header style="margin-top: -2%">
-        <div class="overlay">
-
-        </div>
-        <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-            <source src="{{ asset('/storage/video/trailer.mp4') }} " type="video/mp4">
-        </video>
-
-        <div class="container h-100">
-            <div class="d-flex h-100 text-center align-items-center">
-                <div class="w-100 text-white">
-                    <h1 class="display-3" style="font-weight: 800">FindMyGame</h1>
-                    <p class="lead mb-0">Trouvez le jeu qu'il vous faut au meilleur prix</p>
-                </div>
-            </div>
-        </div>
-    </header>
-
     <section class="my-5">
-        <div class="container h-100 mb-3">
-            <div class="d-flex justify-content-center h-100">
-                <form action="/search" method="post">
-                    {{ csrf_field() }}
-                    <div class="searchbar">
-                        <input class="search_input" type="text" name="search" placeholder="Rechercher...">
-                        <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
-                    </div>
-                </form>
-            </div>
-        </div>
         </body>
         <div class="container">
 
@@ -75,7 +45,6 @@
                         </div>
 
                     @endforeach
-                    {{ $products->links() }}
 
 
                 </div>

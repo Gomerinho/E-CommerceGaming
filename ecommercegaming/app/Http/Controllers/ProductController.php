@@ -68,4 +68,22 @@ class ProductController extends Controller
             'rate' => $rate
         ]); //Retourne la vue avec toutes les données
     }
+
+    public function search()
+    {
+        $search = request('search');
+        if ($search != "") {
+            $products = Product::where('name', 'LIKE', '%' . $search . '%')->get();
+            if ($products != null) {
+                return view('Products/search', [
+                    'products' => $products
+                ]);
+            } else {
+                flash('Aucun jeu correspondant')->error();
+                return redirect('/');
+            }
+        } else {
+            return back();
+        }
+    }
 }
